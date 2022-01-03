@@ -1,4 +1,4 @@
-# produce-aisle (CUE Edition)
+# Team Snacks
 
 Here we demonstrate configuring a local mesh with configuration written entirely
 in CUE.
