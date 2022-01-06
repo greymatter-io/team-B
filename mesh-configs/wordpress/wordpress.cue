@@ -13,16 +13,7 @@ listeners: "wordpress-ingress": {
 		"gm.oidc-authentication",
 	]
 	http_filters: {
-		gm_metrics: {
-			metrics_host:                               "0.0.0.0"
-			metrics_port:                               "8081"
-			metrics_dashboard_uri_path:                 "/metrics"
-			metrics_prometheus_uri_path:                "prometheus"
-			metrics_ring_buffer_size:                   4096
-			prometheus_system_metrics_interval_seconds: 15
-			metrics_key_function:                       "depth"
-			metrics_key_depth:                          "1"
-		}
+		#commonMetrics
 		"gm_oidc-authentication": {
 			"accessToken": {
 				"location": 1
@@ -76,4 +67,15 @@ clusters: wordpress: {
 proxies: wordpress: {
 	domain_keys: ["wordpress-ingress"]
 	listener_keys: ["wordpress-ingress"]
+}
+
+#commonMetrics: gm_metrics: {
+	metrics_host:                               "0.0.0.0"
+	metrics_port:                               "8081"
+	metrics_dashboard_uri_path:                 "/metrics"
+	metrics_prometheus_uri_path:                "prometheus"
+	metrics_ring_buffer_size:                   4096
+	prometheus_system_metrics_interval_seconds: 15
+	metrics_key_function:                       "depth"
+	metrics_key_depth:                          "1"
 }
