@@ -1,0 +1,13 @@
+image:
+  tag: 5.8.2-debian-10-r47
+
+wordpressEmail: jim.gaspari@greymatter.io
+## @param wordpressFirstName WordPress user first name
+##
+wordpressFirstName: Jim
+## @param wordpressLastName WordPress user last name
+##
+wordpressLastName: Gaspari
+## @param wordpressBlogName Blog name
+##
+wordpressBlogName: User's Blog!
