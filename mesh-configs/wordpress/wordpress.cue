@@ -1,38 +1,32 @@
 package wordpress
 
-import "mesh-configs/common"
-// import "github.com/greymatter-io/mesh-configs/common"
-// import "github.com/greymatter-io/greymatter"
-// import "github.com/greymatter-io/defaults"
-
-
 domains: "wordpress-ingress": {
-    port: 10808
-    name: "workpress"
+	port: 10808
+	name: "workpress"
 }
 
 listeners: "wordpress-ingress": {
-    port: 10808
-    domain_keys: ["wordpress"]
-    active_http_filters: [
-        "gm.metrics",
-        "gm.oidc-authentication"
-    ]
-    http_filters: {
-        gm_metrics: {
-            metrics_host:                               "0.0.0.0"
-            metrics_port:                               "8081"
-            metrics_dashboard_uri_path:                 "/metrics"
+	port: 10808
+	domain_keys: ["wordpress"]
+	active_http_filters: [
+		"gm.metrics",
+		"gm.oidc-authentication",
+	]
+	http_filters: {
+		gm_metrics: {
+			metrics_host:                               "0.0.0.0"
+			metrics_port:                               "8081"
+			metrics_dashboard_uri_path:                 "/metrics"
 			metrics_prometheus_uri_path:                "prometheus"
 			metrics_ring_buffer_size:                   4096
 			prometheus_system_metrics_interval_seconds: 15
 			metrics_key_function:                       "depth"
 			metrics_key_depth:                          "1"
-        }
-        "gm_oidc-authentication": {
+		}
+		"gm_oidc-authentication": {
 			"accessToken": {
 				"location": 1
-				"key": "access_token"
+				"key":      "access_token"
 				"cookieOptions": {
 					"httpOnly": true
 					"maxAge":   "6h"
@@ -66,20 +60,20 @@ listeners: "wordpress-ingress": {
 			"clientSecret": "3a4522e4-6ed0-4ba6-9135-13f0027c4b47"
 			"additionalScopes": ["openid"]
 		}
-    }
+	}
 }
 
 clusters: wordpress: {
-    require_tls: true
-    instances: [
-        {
-            host: "localhost" 
-            port: 1234
-        }
-    ]
+	require_tls: true
+	instances: [
+		{
+			host: "localhost"
+			port: 1234
+		},
+	]
 }
 
 proxies: wordpress: {
-    domain_keys: ["wordpress-ingress"]
-    listener_keys: ["wordpress-ingress"]
+	domain_keys: ["wordpress-ingress"]
+	listener_keys: ["wordpress-ingress"]
 }

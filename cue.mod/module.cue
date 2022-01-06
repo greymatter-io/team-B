@@ -1,1 +1,1 @@
-module: "produce.local"
+module: "teamb.io"
