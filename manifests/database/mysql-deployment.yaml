@@ -9,7 +9,7 @@ data:
 apiVersion: v1
 kind: Service
 metadata:
-  name: wordpress-mysql
+  name: wordpressdb
   labels:
     app: wordpress
 spec:
@@ -25,7 +25,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: mysql-pv-claim
   labels:
-    app: wordpress
+    app: wordpressdb
 spec:
   accessModes:
     - ReadWriteOnce
@@ -36,23 +36,23 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: wordpress-mysql
+  name: wordpressdb
   labels:
-    greymatter.io/cluster: wordpressDB
-    app: wordpress
+    greymatter.io/cluster: wordpressdb
+    app: wordpressdb
 spec:
   selector:
     matchLabels:
-      greymatter.io/cluster: wordpressDB
-      app: wordpress
+      greymatter.io/cluster: wordpressdb
+      app: wordpressdb
       tier: mysql
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        greymatter.io/cluster: wordpressDB
-        app: wordpress
+        greymatter.io/cluster: wordpressdb
+        app: wordpressdb
         tier: mysql
     spec:
       containers:
