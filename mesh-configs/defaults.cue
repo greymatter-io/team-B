@@ -14,7 +14,7 @@ listeners: [Name=_]: greymatter.#Listener & {
 	name:         Name
 	listener_key: Name
 	zone_key:     #zone
-	ip:           #allInterfaces
+	ip:           string | *#allInterfaces
 	protocol:     "http_auto"
 }
 

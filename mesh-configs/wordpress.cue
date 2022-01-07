@@ -1,23 +1,27 @@
 package wordpress
 
 // Domains for the Wordpress Site
-domains: "wordpress-ingress": {
+domains: "team-b-wordpress-ingress": {
     port: 10808
 }
-domains: "wordpress-egress": {
+domains: "team-b-wordpress-egress": {
 	port: 10909
 }
+domains: "team-b-wordpress-team-b-wordpressDB-egress": {
+	port: 3306
+}
 
-
-listeners: "wordpress-ingress": {
+listeners: "team-b-wordpress-ingress-listener": {
     port: 10808
-    domain_keys: ["wordpress"]
+    domain_keys: ["team-b-wordpress-ingress"]
     active_http_filters: [
         "gm.metrics",
-        "gm.oidc-authentication"
+        "gm.oidc-authentication",
+		"gm_observables"
     ]
     http_filters: {
         #gm_metrics
+		"gm_observables": {}
         "gm_oidc-authentication": {
 			"accessToken": {
 				"location": 1
@@ -56,14 +60,47 @@ listeners: "wordpress-ingress": {
 		}
     }
 }
+listeners: "team-b-wordpress-egress-listener": {
+	port: 10909
+    domain_keys: ["team-b-wordpress-egress"]
+    active_http_filters: [
+		"gm_inheaders"
+    ]
+    http_filters: {
+		"gm_inheaders": {}
+	}
+}
+listeners: "team-b-wordpress-wordpressDB-egress-listener": {
+	domain_keys: ["team-b-wordpress-team-b-wordpressDB-egress"]
+	port: 3306
+	ip: "127.0.0.1"
+	active_network_filters: ["envoy.tcp_proxy"]
+	network_filters: {
+		"envoy_tcp_proxy": {
+			"stat_prefix": "team-b-wordpress-tcp",
+			"cluster": "wordpressDB"
+		}
+    }
+}
 
-routes: wordpress: {
-	domain_key: "wordpress-ingress"
+routes: "wordpress-local": {
+	domain_key: "team-b-wordpress-ingress"
 	path: "/"
 }
 
+routes: "route-team-b-wordpress-wordpressDB": {
+	domain_key: "team-b-wordpress-team-b-wordpressDB-egress"
+	rules: [{
+		constraints: {
+			light: [{
+				cluster_key: "wordpressDB"
+				weight:      1
+			}]
+		}
+	}]
+}
 
 proxies: wordpress: {
-    domain_keys: ["team-b-wordpress-ingress", "team-b-wordpress-egress"]
-    listener_keys: ["wordpress-ingress"]
+    domain_keys: ["team-b-wordpress-ingress", "team-b-wordpress-egress", "team-b-wordpress-team-b-wordpressDB-egress"]
+    listener_keys: ["team-b-wordpress-ingress-listener", "team-b-wordpress-egress-listener", "team-b-wordpress-wordpressDB-egress-listener"]
 }
