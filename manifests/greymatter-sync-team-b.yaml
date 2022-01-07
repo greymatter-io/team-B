@@ -9,7 +9,7 @@ spec:
   selector:
     matchLabels:
       app: greymatter-sync-team-b
-  serviceName: "greymatter-sync-team-b"
+  serviceName: greymatter-sync-team-b
   replicas: 1
   template:
     metadata:
@@ -18,7 +18,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 10
       imagePullSecrets:
-      - name: docker.secret
+      - name: gm-docker-secret
       volumes:
       - name: ssh-private-key
         secret:
@@ -49,7 +49,7 @@ spec:
         - name: GREYMATTER_GIT_REMOTE
           valueFrom:
             configMapKeyRef:
-              name: greymatter-sync-config
+              name: greymatter-sync-team-b-config
               key: GREYMATTER_GIT_REMOTE
         - name: GREYMATTER_GIT_BRANCH
           valueFrom:
@@ -60,7 +60,7 @@ spec:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: greymatter-sync-config
+  name: greymatter-sync-team-b-config
   namespace: team-b
 data:
   # property-like keys; each key maps to a simple value
