@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: greymatter-sync
+  name: greymatter-sync-team-b
   namespace: team-b
   annotations:
     greymatter.io/egress-http-local: '["control", "catalog"]'
 spec:
   selector:
     matchLabels:
-      app: greymatter-sync
-  serviceName: "team-b-greymatter-sync"
+      app: greymatter-sync-team-b
+  serviceName: "greymatter-sync-team-b"
   replicas: 1
   template:
     metadata:
       labels:
-        app: greymatter-sync
+        app: greymatter-sync-team-b
     spec:
       terminationGracePeriodSeconds: 10
       imagePullSecrets:

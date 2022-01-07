@@ -1,15 +1,7 @@
 package wordpress
 
 // Domains for the Wordpress Site
-domains: "team-b-wordpress-ingress": {
-    port: 10808
-}
-domains: "team-b-wordpress-egress": {
-	port: 10909
-}
-domains: "team-b-wordpress-team-b-wordpressDB-egress": {
-	port: 3306
-}
+domains: "wordpress": port: 10808
 
 listeners: "team-b-wordpress-ingress-listener": {
     port: 10808
@@ -70,30 +62,27 @@ listeners: "team-b-wordpress-egress-listener": {
 		"gm_inheaders": {}
 	}
 }
-listeners: "team-b-wordpress-wordpressDB-egress-listener": {
-	domain_keys: ["team-b-wordpress-team-b-wordpressDB-egress"]
-	port: 3306
+listeners: "wordpress-egress-tcp-to-wordpressdb": {
+	domain_keys: ["wordpress-to-wordpressdb"]
+	port: 10910
 	ip: "127.0.0.1"
 	active_network_filters: ["envoy.tcp_proxy"]
 	network_filters: {
 		"envoy_tcp_proxy": {
 			"stat_prefix": "team-b-wordpress-tcp",
-			"cluster": "wordpressDB"
+			"cluster": "wordpressdb"
 		}
     }
 }
 
-routes: "wordpress-local": {
-	domain_key: "team-b-wordpress-ingress"
-	path: "/"
-}
+domains: "wordpress-to-wordpressdb": port: 10910
 
-routes: "route-team-b-wordpress-wordpressDB": {
-	domain_key: "team-b-wordpress-team-b-wordpressDB-egress"
+routes: "wordpress-to-wordpressdb": {
+	domain_key: "wordpress-to-wordpressdb"
 	rules: [{
 		constraints: {
 			light: [{
-				cluster_key: "wordpressDB"
+				cluster_key: "wordpress-to-wordpressdb"
 				weight:      1
 			}]
 		}
@@ -101,6 +90,6 @@ routes: "route-team-b-wordpress-wordpressDB": {
 }
 
 proxies: wordpress: {
-    domain_keys: ["team-b-wordpress-ingress", "team-b-wordpress-egress", "team-b-wordpress-team-b-wordpressDB-egress"]
-    listener_keys: ["team-b-wordpress-ingress-listener", "team-b-wordpress-egress-listener", "team-b-wordpress-wordpressDB-egress-listener"]
+    domain_keys: ["team-b-wordpress-ingress", "team-b-wordpress-egress", "team-b-wordpress-team-b-wordpressdb-egress"]
+    listener_keys: ["team-b-wordpress-ingress-listener", "team-b-wordpress-egress-listener", "team-b-wordpress-wordpressdb-egress-listener"]
 }

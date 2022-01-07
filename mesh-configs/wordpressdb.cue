@@ -1,28 +1,23 @@
-// package wordpressDB
+package wordpress
 
-// Domains for the wordpressDB Site
-domains: "team-b-wordpressDB-ingress": {
+// Domains for the wordpressdb Site
+domains: "wordpressdb": {
     port: 10808
 }
 
-listeners: "team-b-wordpressDB-ingress-listener": {
+listeners: "wordpressdb": {
     port: 10808
-    domain_keys: ["team-b-wordpressDB-ingress"]
+    domain_keys: ["team-b-wordpressdb-ingress"]
     active_network_filters: ["envoy.tcp_proxy"]
 	network_filters: {
 		"envoy_tcp_proxy": {
 			"stat_prefix": "team-b-wordpressdb-tcp",
-			"cluster": "wordpressDB-local"
+			"cluster": "wordpressdb:3306"
 		}
     }
 }
 
-routes: "wordpressDB-local": {
-	domain_key: "team-b-wordpressDB-ingress"
-	path: "/"
-}
-
-proxies: wordpressDB: {
-    domain_keys: ["team-b-wordpressDB-ingress"]
-    listener_keys: ["team-b-wordpressDB-ingress-listener"]
+proxies: wordpressdb: {
+    domain_keys: ["wordpressdb"]
+    listener_keys: ["wordpressdb"]
 }
