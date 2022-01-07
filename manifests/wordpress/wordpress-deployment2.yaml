@@ -4,6 +4,9 @@ metadata:
   name: wordpress2
   labels:
     app: wordpress2
+  annotations:
+    greymatter.io/egress-http-local: '["control", "catalog"]'
+    greymatter.io/egress-tcp-local: '["wordpressDB"]'
 spec:
   ports:
     - port: 80
