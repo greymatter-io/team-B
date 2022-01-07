@@ -1,9 +1,13 @@
 package wordpress
 
+// Domains for the Wordpress Site
 domains: "wordpress-ingress": {
     port: 10808
-    name: "workpress"
 }
+domains: "wordpress-egress": {
+	port: 10909
+}
+
 
 listeners: "wordpress-ingress": {
     port: 10808
@@ -33,7 +37,6 @@ listeners: "wordpress-ingress": {
 					"httpOnly": true
 					"maxAge":   "6h"
 					"domain":   "a6e293bb0b6ea4f0ab5082f30ae242b0-553823424.us-east-1.elb.amazonaws.com"
-					// "domain":   "subdomain.greymatter.services"
 					"path": "/"
 				}
 			}
@@ -61,6 +64,6 @@ routes: wordpress: {
 
 
 proxies: wordpress: {
-    domain_keys: ["wordpress-ingress"]
+    domain_keys: ["team-b-wordpress-ingress", "team-b-wordpress-egress"]
     listener_keys: ["wordpress-ingress"]
 }

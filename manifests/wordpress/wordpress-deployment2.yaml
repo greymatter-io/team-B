@@ -1,23 +1,23 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: wordpress
+  name: wordpress2
   labels:
-    app: wordpress
+    app: wordpress2
 spec:
   ports:
     - port: 80
   selector:
-    app: wordpress
+    app: wordpress2
     tier: frontend
   type: LoadBalancer
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: wp-pv-claim
+  name: wp2-pv-claim
   labels:
-    app: wordpress
+    app: wordpress2
 spec:
   accessModes:
     - ReadWriteOnce
@@ -28,15 +28,15 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: wordpress
+  name: wordpress2
   labels:
     greymatter.io/cluster: wordpress
-    app: wordpress
+    app: wordpress2
 spec:
   selector:
     matchLabels:
       greymatter.io/cluster: wordpress
-      app: wordpress
+      app: wordpress2
       tier: frontend
   strategy:
     type: Recreate
@@ -44,12 +44,12 @@ spec:
     metadata:
       labels:
         greymatter.io/cluster: wordpress
-        app: wordpress
+        app: wordpress2
         tier: frontend
     spec:
       containers:
       - image: wordpress:4.8-apache
-        name: wordpress
+        name: wordpress2
         env:
         - name: WORDPRESS_DB_HOST
           value: wordpress-mysql
@@ -62,9 +62,9 @@ spec:
         - containerPort: 80
           name: wordpress
         volumeMounts:
-        - name: wordpress-persistent-storage
+        - name: wordpress2-persistent-storage
           mountPath: /var/www/html
       volumes:
-      - name: wordpress-persistent-storage
+      - name: wordpress2-persistent-storage
         persistentVolumeClaim:
-          claimName: wp-pv-claim
+          claimName: wp2-pv-claim
