@@ -1,11 +1,19 @@
-package wordpress
+// package wordpress
+
+
+catalogservices: "wordpress": {
+	name:         "Grey Matter Wordpress Site"
+	description:  "A wordpress site for information about the mesh."
+	mesh_id: "default-zone"
+	service_id: "wordpress"
+}
 
 // Domains for the Wordpress Site
 domains: "wordpress": port: 10808
 
-listeners: "team-b-wordpress-ingress-listener": {
+listeners: "wordpress": {
     port: 10808
-    domain_keys: ["team-b-wordpress-ingress"]
+    domain_keys: ["wordpress"]
     active_http_filters: [
         "gm.metrics",
         "gm.oidc-authentication",
@@ -52,25 +60,25 @@ listeners: "team-b-wordpress-ingress-listener": {
 		}
     }
 }
-listeners: "team-b-wordpress-egress-listener": {
-	port: 10909
-    domain_keys: ["team-b-wordpress-egress"]
-    active_http_filters: [
-		"gm_inheaders"
-    ]
-    http_filters: {
-		"gm_inheaders": {}
-	}
-}
+// listeners: "wordpress-egress-listener": {
+// 	port: 10909
+//     domain_keys: ["team-b-wordpress-egress"]
+//     active_http_filters: [
+// 		"gm_inheaders"
+//     ]
+//     http_filters: {
+// 		"gm_inheaders": {}
+// 	}
+// }
 listeners: "wordpress-egress-tcp-to-wordpressdb": {
 	domain_keys: ["wordpress-to-wordpressdb"]
-	port: 10910
+	port: 3306
 	ip: "127.0.0.1"
 	active_network_filters: ["envoy.tcp_proxy"]
 	network_filters: {
 		"envoy_tcp_proxy": {
 			"stat_prefix": "team-b-wordpress-tcp",
-			"cluster": "wordpressdb"
+			"cluster": "wordpressdb:3307"
 		}
     }
 }
@@ -90,6 +98,6 @@ routes: "wordpress-to-wordpressdb": {
 }
 
 proxies: wordpress: {
-    domain_keys: ["team-b-wordpress-ingress", "team-b-wordpress-egress", "team-b-wordpress-team-b-wordpressdb-egress"]
-    listener_keys: ["team-b-wordpress-ingress-listener", "team-b-wordpress-egress-listener", "team-b-wordpress-wordpressdb-egress-listener"]
+    domain_keys: ["wordpress", "wordpress-to-wordpressdb"]
+    listener_keys: ["wordpress", "wordpress-egress-tcp-to-wordpressdb"]
 }

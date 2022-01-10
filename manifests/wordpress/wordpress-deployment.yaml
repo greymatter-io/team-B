@@ -4,9 +4,6 @@ metadata:
   name: wordpress
   labels:
     app: wordpress
-  annotations:
-    greymatter.io/egress-http-local: '["control", "catalog"]'
-    greymatter.io/egress-tcp-local: '["wordpressDB"]'
 spec:
   ports:
     - port: 80
@@ -35,6 +32,9 @@ metadata:
   labels:
     greymatter.io/cluster: wordpress
     app: wordpress
+  annotations:
+    greymatter.io/egress-http-local: '["control", "catalog"]'
+    greymatter.io/egress-tcp-local: '["wordpressDB:3307"]'
 spec:
   selector:
     matchLabels:

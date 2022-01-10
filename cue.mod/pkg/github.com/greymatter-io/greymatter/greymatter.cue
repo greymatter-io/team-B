@@ -19,6 +19,9 @@ package greymatter
 	checksum?: string
 }
 
+#Catalog: {
+	
+}
 #Metadata: {
 	metadata?: [...#Metadatum]
 }

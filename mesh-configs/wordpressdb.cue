@@ -1,13 +1,22 @@
 package wordpress
 
+
+catalogservices: "wordpressdb": {
+	name:         "Grey Matter Wordpress Database"
+	description:  "The database for the wordpress site for information about the mesh."
+	mesh_id: "default-zone"
+	service_id: "wordpressdb"
+}
+
+
 // Domains for the wordpressdb Site
 domains: "wordpressdb": {
-    port: 10808
+    port: 3306
 }
 
 listeners: "wordpressdb": {
-    port: 10808
-    domain_keys: ["team-b-wordpressdb-ingress"]
+    port: 3306
+    domain_keys: ["wordpressdb"]
     active_network_filters: ["envoy.tcp_proxy"]
 	network_filters: {
 		"envoy_tcp_proxy": {

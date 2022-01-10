@@ -13,5 +13,3 @@ package wordpress
 			metrics_key_function:                       "depth"
 			metrics_key_depth:                          "1"
         	}
-
-
