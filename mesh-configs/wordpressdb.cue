@@ -1,12 +1,12 @@
-package wordpress
+// package wordpress
 
 
-catalogservices: "wordpressdb": {
-	name:         "Grey Matter Wordpress Database"
-	description:  "The database for the wordpress site for information about the mesh."
-	mesh_id: "default-zone"
-	service_id: "wordpressdb"
-}
+// catalogservices: "wordpressdb": {
+// 	name:         "Grey Matter Wordpress Database"
+// 	description:  "The database for the wordpress site for information about the mesh."
+// 	mesh_id: "default-zone"
+// 	service_id: "wordpressdb"
+// }
 
 
 // Domains for the wordpressdb Site
@@ -20,7 +20,7 @@ listeners: "wordpressdb": {
     active_network_filters: ["envoy.tcp_proxy"]
 	network_filters: {
 		"envoy_tcp_proxy": {
-			"stat_prefix": "team-b-wordpressdb-tcp",
+			"stat_prefix": "wordpressdb-tcp",
 			"cluster": "wordpressdb:3306"
 		}
     }

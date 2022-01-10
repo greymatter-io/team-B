@@ -34,7 +34,7 @@ metadata:
     app: wordpress
   annotations:
     greymatter.io/egress-http-local: '["control", "catalog"]'
-    greymatter.io/egress-tcp-local: '["wordpressDB:3307"]'
+    greymatter.io/egress-tcp-local: '["wordpressdb"]'
 spec:
   selector:
     matchLabels:
@@ -55,7 +55,7 @@ spec:
         name: wordpress
         env:
         - name: WORDPRESS_DB_HOST
-          value: 127.0.0.1
+          value: 127.0.0.1:10912
         - name: WORDPRESS_DB_PASSWORD
           valueFrom:
             secretKeyRef:

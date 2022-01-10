@@ -3,8 +3,8 @@ kind: Secret
 metadata:
   name: mysql-pass
 type: Opaque
-data:
-  password: password
+stringData:
+  password: "password"
 ---
 apiVersion: v1
 kind: Service
@@ -37,6 +37,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: wordpressdb
+  annotations:
+    greymatter.io/ingress-tcp-port-name: mysql
   labels:
     greymatter.io/cluster: wordpressdb
     app: wordpressdb
