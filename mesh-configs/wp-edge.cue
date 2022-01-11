@@ -6,6 +6,7 @@ catalogservices: "wordpress-application-edge-color": {
 	description: "The database for the Wordpress site."
     documentation: "https://wordpress.next-gen-demo.greymatter.services"
     api_endpoint: "https://wordpress.next-gen-demo.greymatter.services"
+    capability: ""
 }
 
 routes: "wp-application-edge":{
