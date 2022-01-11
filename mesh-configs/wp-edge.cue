@@ -1,4 +1,4 @@
-package wordpress
+// package wordpress
 
 
 catalogservices: "wordpress-application-edge": {
