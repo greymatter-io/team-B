@@ -3,7 +3,6 @@ package wordpress
 catalogservices: "wordpress": {
 	name:        "Wordpress Site"
 	description: "A Wordpress site."
-	capability: "web"
 }
 
 listeners: "wordpress": {
