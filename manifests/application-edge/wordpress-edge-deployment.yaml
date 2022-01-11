@@ -13,7 +13,7 @@ data:
     <html>
     <body style="background-color:wordpress-application-edge;">
 
-    <h1 style="background-color:black;color:white;text-align:center">WORDPRESS-APPLICATION-EDGE</h1>
+    <h1 style="background-color:black;color:blue;text-align:center">WORDPRESS-APPLICATION-EDGE</h1>
 
 
     </body>
@@ -42,8 +42,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: wordpress-application-edge-color
+  annotations:
+    greymatter.io/egress-http-local: '["control","catalog","wordpress"]'
   labels:
-    helm.sh/chart: color-0.0.1
     app: wordpress-application-edge
     greymatter.io/control: wordpress-application-edge
 spec:
