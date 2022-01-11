@@ -82,9 +82,9 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 10808
               hostPort: 
-              protocol: TCP 
+              protocol: TCP
           env:
             null
           resources:
