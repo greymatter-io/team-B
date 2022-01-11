@@ -25,10 +25,10 @@ routes: "wp-application-edge":{
     domain_key: "wordpress-application-edge-color"
 }
 
-domains: "wp-application-edge": port: 10710
+domains: "wp-application-edge": port: 10809
 
 listeners: "wp-application-edge":{
-    port: 10710
+    port: 10809
     domain_keys: ["wp-application-edge"]
     active_http_filters:[
         "gm.metrics"
