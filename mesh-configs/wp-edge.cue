@@ -16,7 +16,7 @@ routes: "wp-application-edge":{
     redirects: [{
         from: "^/services/wordpress$"
         name: ""
-        redirect_type: "permanent"
+        redirectType: "permanent"
         to: "/services/wordpress/"
     }]
     rules: [{
