@@ -33,6 +33,8 @@ spec:
         - "/etc/greymatter/config.toml"
         - "sync"
         - "--cue"
+        - "--root"
+        - "mesh-configs"
         - "--git"
         - "--forever"
         - "--interval"
