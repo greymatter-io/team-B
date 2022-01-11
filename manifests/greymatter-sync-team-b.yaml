@@ -35,6 +35,8 @@ spec:
         - "--cue"
         - "--relative-path"
         - "mesh-configs"
+        - "--branch"
+        - "application"
         - "--git"
         - "--forever"
         - "--interval"
@@ -53,11 +55,6 @@ spec:
             configMapKeyRef:
               name: greymatter-sync-team-b-config
               key: GREYMATTER_GIT_REMOTE
-        - name: GREYMATTER_GIT_BRANCH
-          valueFrom:
-            configMapKeyRef:
-              name: greymatter-sync-team-b-config
-              key: GREYMATTER_GIT_BRANCH
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -67,4 +64,3 @@ metadata:
 data:
   # property-like keys; each key maps to a simple value
   GREYMATTER_GIT_REMOTE: "git@github.com:greymatter-io/team-B.git"
-  GREYMATTER_GIT_BRANCH: "application"
