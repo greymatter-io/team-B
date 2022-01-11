@@ -17,7 +17,7 @@ routes: "wp-application-edge":{
         from: "^/services/wordpress-application-edge-color$"
         name: ""
         redirect_type: "permanent"
-        to: "/services/wordpress/"
+        to: "/services/wordpress-application-edge-color/"
     }]
     rules: [{
         constraints:{
