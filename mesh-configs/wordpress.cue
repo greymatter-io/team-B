@@ -10,7 +10,7 @@ listeners: "wordpress": {
 	domain_keys: ["wordpress"]
 	active_http_filters: [
 		"gm.metrics",
-		// "gm.observables",
+		"gm.observables",
 	]
 	http_filters: {
 		#gm_metrics_filter
