@@ -10,14 +10,14 @@ catalogservices: "wordpress-application-edge-color": {
 
 routes: "wp-application-edge":{
     route_match:{
-        path: "/services/wordpress"
+        path: "/services/wordpress-application-edge-color"
         match_type: "prefix"
     }
     redirects: [{
-        from: "^/services/wordpress$"
+        from: "^/services/wordpress-application-edge-color$"
         name: ""
         redirect_type: "permanent"
-        to: "/services/wordpress/"
+        to: "/services/wordpress-application-edge-color/"
     }]
     rules: [{
         constraints:{
