@@ -72,47 +72,47 @@
 // 	}
 // }
 
-clusters: "wordpress-to-wordpressdb": {
-	secret: {
-        "ecdh_curves": [
-        "X25519:P-256:P-521:P-384"
-        ],
-        "secret_key": "",
-        "secret_name": "spiffe://greymatter.io/mesh-sample.wordpress",
-        "secret_validation_name": "spiffe://greymatter.io",
-        "subject_names": [
-        "spiffe://greymatter.io/mesh-sample.wordpressdb"
-        ]	
-}
+// clusters: "wordpress-to-wordpressdb": {
+// 	secret: {
+//         "ecdh_curves": [
+//         "X25519:P-256:P-521:P-384"
+//         ],
+//         "secret_key": "",
+//         "secret_name": "spiffe://greymatter.io/mesh-sample.wordpress",
+//         "secret_validation_name": "spiffe://greymatter.io",
+//         "subject_names": [
+//         "spiffe://greymatter.io/mesh-sample.wordpressdb"
+//         ]	
+// }
 
-listeners: "wordpress-egress-tcp-to-wordpressdb": {
-	domain_keys: ["wordpress-to-wordpressdb"]
-	port: 3306
-	ip: "127.0.0.1"
-	active_network_filters: ["envoy.tcp_proxy"]
-	network_filters: {
-		"envoy_tcp_proxy": {
-			"stat_prefix": "wordpress-tcp",
-			"cluster": "wordpressdb:3307"
-		}
-    }
-}
+// listeners: "wordpress-egress-tcp-to-wordpressdb": {
+// 	domain_keys: ["wordpress-to-wordpressdb"]
+// 	port: 3306
+// 	ip: "127.0.0.1"
+// 	active_network_filters: ["envoy.tcp_proxy"]
+// 	network_filters: {
+// 		"envoy_tcp_proxy": {
+// 			"stat_prefix": "wordpress-tcp",
+// 			"cluster": "wordpressdb:3307"
+// 		}
+//     }
+// }
 
-domains: "wordpress-to-wordpressdb": port: 10910
+// domains: "wordpress-to-wordpressdb": port: 10910
 
-routes: "wordpress-to-wordpressdb": {
-	domain_key: "wordpress-to-wordpressdb"
-	rules: [{
-		constraints: {
-			light: [{
-				cluster_key: "wordpress-to-wordpressdb"
-				weight:      1
-			}]
-		}
-	}]
-}
+// routes: "wordpress-to-wordpressdb": {
+// 	domain_key: "wordpress-to-wordpressdb"
+// 	rules: [{
+// 		constraints: {
+// 			light: [{
+// 				cluster_key: "wordpress-to-wordpressdb"
+// 				weight:      1
+// 			}]
+// 		}
+// 	}]
+// }
 
-proxies: wordpress: {
-    domain_keys: ["wordpress", "wordpress-to-wordpressdb"]
-    listener_keys: ["wordpress", "wordpress-egress-tcp-to-wordpressdb"]
-}
+// proxies: wordpress: {
+//     domain_keys: ["wordpress", "wordpress-to-wordpressdb"]
+//     listener_keys: ["wordpress", "wordpress-egress-tcp-to-wordpressdb"]
+// }
