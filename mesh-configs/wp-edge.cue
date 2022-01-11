@@ -8,7 +8,7 @@ routes: "wp-application-edge":{
     rules: [{
         constraints:{
             light:[{
-                cluster_key: "wordpress:80"
+                cluster_key: "wordpress"
                 weight: 1
             }]
         }
