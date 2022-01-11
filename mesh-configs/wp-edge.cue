@@ -9,6 +9,16 @@ catalogservices: "wordpress-application-edge-color": {
 }
 
 routes: "wp-application-edge":{
+    route_match:{
+        path: "/services/wordpress"
+        matchType: "prefix"
+    }
+    redirects: [{
+        from: "^/services/wordpress$"
+        name: ""
+        redirect_type: "permanent"
+        to: "/services/wordpress/"
+    }]
     rules: [{
         constraints:{
             light:[{
