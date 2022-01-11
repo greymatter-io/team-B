@@ -1,0 +1,91 @@
+---
+# Source: color/templates/blue_configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "wordpress-application-edge-color-configmap"
+  labels:
+    app: wordpress-application-edge
+    greymatter.io/control: wordpress-application-edge
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html>
+    <body style="background-color:wordpress-application-edge;">
+
+    <h1 style="background-color:black;color:white;text-align:center">WORDPRESS-APPLICATION-EDGE</h1>
+
+
+    </body>
+    </html>
+---
+# Source: color/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: wordpress-application-edge-color
+  labels:
+    app: wordpress-application-edge
+    greymatter.io/control: wordpress-application-edge
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      protocol: TCP
+      name: metrics
+  selector:
+    app: wordpress-application-edge
+    greymatter.io/control: wordpress-application-edge
+---
+# Source: color/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress-application-edge-color
+  labels:
+    helm.sh/chart: color-0.0.1
+    app: wordpress-application-edge
+    greymatter.io/control: wordpress-application-edge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordpress-application-edge
+      greymatter.io/control: wordpress-application-edge
+  template:
+    metadata:
+      annotations:
+        rollme: '{{ randAlphaNum 5 | quote }}'
+      labels:
+        app: wordpress-application-edge
+        greymatter.io/control: wordpress-application-edge
+    spec:
+      imagePullSecrets:
+        - name: docker.secret
+      securityContext:
+        null
+      containers:
+        - name: color
+          securityContext:
+            null
+          image: "httpd:2.4"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 80
+              hostPort: 
+              protocol: TCP       
+          env:
+            null
+          resources:
+            {}
+          volumeMounts:
+            - mountPath: /usr/local/apache2/htdocs/
+              name: conf
+      volumes:
+        - name: sidecar
+          secret:
+            secretName: sidecar-certs
+        - name: conf
+          configMap:
+                name: "wordpress-application-edge-color-configmap"
