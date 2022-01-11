@@ -8,10 +8,6 @@ catalogservices: "wordpress-application-edge-color": {
 }
 
 routes: "wp-application-edge":{
-    route_match:{
-        path: "/"
-        matchType: "prefix"
-    }
     rules: [{
         constraints:{
             light:[{
