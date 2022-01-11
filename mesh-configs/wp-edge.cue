@@ -25,7 +25,7 @@ routes: "wp-application-edge":{
     domain_key: "wordpress-application-edge-color"
 }
 
-domains: "wp-application-edge": port: 10912
+domains: "wp-application-edge": port: 443
 
 listeners: "wp-application-edge":{
     port: 443
