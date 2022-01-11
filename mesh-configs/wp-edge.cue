@@ -1,7 +1,7 @@
 package wordpress
 
 
-catalogservices: "wordpress-application-edge-color": {
+catalogservices: "wordpress-application-edge": {
 	name:        "Wordpress Edge"
 	description: "The database for the Wordpress site."
     documentation: "https://wordpress.next-gen-demo.greymatter.services"
@@ -22,7 +22,7 @@ routes: "wp-application-edge":{
             }]
         }
     }]
-    domain_key: "wordpress-application-edge-color"
+    domain_key: "wordpress-application-edge"
 }
 
 domains: "wp-application-edge":{
@@ -46,7 +46,7 @@ listeners: "wp-application-edge":{
     }
 }
 
-proxies:"wordpress-application-edge-color": {
-    domain_keys: ["wordpress-application-edge-color","wordpress-application-edge-color-egress-http","wordpress-application-edge-color-egress-tcp-to-gm-redis","wp-application-edge"]
-    listener_keys: ["wordpress-application-edge-color","wordpress-application-edge-color-egress-http","wordpress-application-edge-color-egress-tcp-to-gm-redis","wp-application-edge"]
+proxies:"wordpress-application-edge": {
+    domain_keys: ["wordpress-application-edge","wordpress-application-edge-egress-http","wordpress-application-edge-egress-tcp-to-gm-redis","wp-application-edge"]
+    listener_keys: ["wordpress-application-edge","wordpress-application-edge-egress-http","wordpress-application-edge-egress-tcp-to-gm-redis","wp-application-edge"]
 }
