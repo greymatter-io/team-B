@@ -25,7 +25,15 @@ routes: "wp-application-edge":{
     domain_key: "wordpress-application-edge-color"
 }
 
-domains: "wp-application-edge": port: 10809
+domains: "wp-application-edge":{
+    port: 10809
+    custom_headers: [
+		{
+			key:   "x-forwarded-proto"
+			value: "https"
+		},
+	]
+}
 
 listeners: "wp-application-edge":{
     port: 10809
