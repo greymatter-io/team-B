@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: greymatter-sync-team-b
-  namespace: team-b
+  namespace: greymatter
   annotations:
     greymatter.io/egress-http-local: '["control", "catalog"]'
 spec:
@@ -33,6 +33,8 @@ spec:
         - "/etc/greymatter/config.toml"
         - "sync"
         - "--cue"
+        - "--relative-path"
+        - "mesh-configs"
         - "--git"
         - "--forever"
         - "--interval"
@@ -54,14 +56,14 @@ spec:
         - name: GREYMATTER_GIT_BRANCH
           valueFrom:
             configMapKeyRef:
-              name: greymatter-sync-config
+              name: greymatter-sync-team-b-config
               key: GREYMATTER_GIT_BRANCH
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: greymatter-sync-team-b-config
-  namespace: team-b
+  namespace: greymatter
 data:
   # property-like keys; each key maps to a simple value
   GREYMATTER_GIT_REMOTE: "git@github.com:greymatter-io/team-B.git"
