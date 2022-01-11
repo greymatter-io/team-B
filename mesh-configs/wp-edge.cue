@@ -22,7 +22,7 @@ routes: "wp-application-edge":{
             }]
         }
     }]
-    domain_key: "wp-application-edge"
+    domain_key: "wordpress-application-edge-color"
 }
 
 domains: "wp-application-edge": port: 10912
