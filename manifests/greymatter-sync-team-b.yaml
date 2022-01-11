@@ -33,7 +33,7 @@ spec:
         - "/etc/greymatter/config.toml"
         - "sync"
         - "--cue"
-        - "--root"
+        - "--relative-path"
         - "mesh-configs"
         - "--git"
         - "--forever"
