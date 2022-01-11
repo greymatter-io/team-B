@@ -19,9 +19,7 @@ package greymatter
 	checksum?: string
 }
 
-#Catalog: {
-	
-}
+// TODO(cm): this type is likely malformed/superfluous
 #Metadata: {
 	metadata?: [...#Metadatum]
 }
@@ -36,8 +34,8 @@ package greymatter
 	zone_key:     string
 	name:         string
 	// Docs say deprecated: https://docs.greymatter.io/reference/api/fabric-api/listener#protocol
-	protocol?: string
-	active_network_filters?: [...string]
+	protocol?:               string
+	active_network_filters?: [...string] | null
 	// TODO: are we handling these correctly?
 	// is _ the arbitrary type?
 	network_filters?: _
@@ -45,7 +43,7 @@ package greymatter
 	http_filters?: _
 	ip:            string
 	port:          int64
-	domain_keys?: [...string]
+	domain_keys: [...string]
 	tracing_config:          #TracingConfig | *null
 	secret?:                 #Secret
 	org_key?:                string
@@ -110,8 +108,8 @@ package greymatter
 }
 
 #AccessLoggers: {
-	hTTPConnectionLoggers?: #Loggers
-	hTTPUpstreamLoggers?:   #Loggers
+	http_connection_loggers?: #Loggers
+	http_upstream_loggers?:   #Loggers
 }
 
 #FileAccessLog: {
@@ -165,12 +163,12 @@ package greymatter
 }
 
 #DataSource: {
-	filename?:     string
-	inlineString?: string
+	filename?:      string
+	inline_string?: string
 }
 
 #CommonConfig: {
-	logName?:     string
+	log_name?:    string
 	gRPCService?: #GRPCService
 }
 
@@ -224,18 +222,18 @@ package greymatter
 }
 
 #SSLConfig: {
-	cipherFilter?: string
+	cipher_filter?: string
 	protocols?: [...string]
-	certKeyPairs?: [...#CertKeyPathPair]
-	requireClientCerts?: bool
-	trustFile?:          string
-	SNI?: [...string]
-	CRL?: #DataSource
+	cert_key_pairs?: [...#CertKeyPathPair]
+	require_client_certs?: bool
+	trust_file?:           string
+	sni?: string
+	crl?: #DataSource
 }
 
 #CertKeyPathPair: {
-	certificatePath?: string
-	keyPath?:         string
+	certificate_path?: string
+	key_path?:         string
 }
 
 #SetCurrentClientCertDetails: {
@@ -286,10 +284,10 @@ package greymatter
 }
 
 #HTTPHealthCheck: {
-	host?:        string
-	path?:        string
-	serviceName?: string
-	request_headers_to_add?: [...#Metadata]
+	host?:                   string
+	path?:                   string
+	serviceName?:            string
+	request_headers_to_add?: [...#Metadata] | null
 }
 
 #OutlierDetection: {
@@ -344,18 +342,18 @@ package greymatter
 }
 
 #Cluster: {
-	cluster_key: string
-	zone_key:    string
-	name:        string
-	require_tls: bool
-	secret?:     #Secret
-	ssl_config?: #SSLConfig
+	cluster_key:  string
+	zone_key:     string
+	name:         string
+	require_tls?: bool
+	secret?:      #Secret
+	ssl_config?:  #SSLConfig
 	instances?: [...#Instance]
 	org_key?: string
 	// modified from protobuf
-	circuit_breakers:  #CircuitBreakers | #CircuitBreakersThresholds | *null
-	outlier_detection: #OutlierDetection | *null
-	health_checks: [...#HealthCheck]
+	circuit_breakers?:  #CircuitBreakers | #CircuitBreakersThresholds | *null
+	outlier_detection?: #OutlierDetection | *null
+	health_checks?: [...#HealthCheck]
 	lb_policy?:              string | *""
 	http_protocol_options?:  #HTTPProtocolOptions
 	http2_protocol_options?: #HTTP2ProtocolOptions
@@ -383,17 +381,17 @@ package greymatter
 	// Name is a virtual host pattern
 	name: string | *"*"
 	// Port should probably match Listener
-	port:        int64
-	ssl_config?: #SSLConfig
-	redirects:   [...#Redirect] | *null
-	cors_config: #CorsConfig | *null
-	aliases:     [...string] | *null
-	org_key?:    string
-	force_https: bool | *false
+	port:         int64
+	ssl_config?:  #SSLConfig | null
+	redirects?:   [...#Redirect] | *null
+	cors_config?: #CorsConfig | *null
+	aliases?:     [...string] | *null
+	org_key?:     string
+	force_https?: bool | *false
 	custom_headers?: [...#Header]
 	checksum?: #Checksum
 	// not in protobuf?
-	gzip_enabled: bool | *false
+	gzip_enabled?: bool | *false
 }
 
 #CorsConfig: {
@@ -414,44 +412,44 @@ package greymatter
 	route_key:  string
 	domain_key: string
 	zone_key:   string
-	// path is deprecated
+	// path is deprecated (remove it?)
 	path?:             string
 	route_match?:      #RouteMatch
-	prefix_rewrite:    string | *null
-	redirects:         [...#Redirect] | *null
+	prefix_rewrite?:   string | *null
+	redirects?:        [...#Redirect] | null
 	shared_rules_key?: string
 	rules:             [...#Rule] | *null
-	response_data:     #ResponseData
-	cohort_seed:       string | *null
-	retry_policy:      #RetryPolicy | *null
+	response_data?:    #ResponseData
+	cohort_seed?:      string | *null
+	retry_policy?:     #RetryPolicy | *null
 	high_priority?:    bool
-	filter_metadata?: {
-		[string]: #Metadata
-	}
+	filter_metadata?:  {
+		[string]: [...#Metadatum]
+	} | null
 	filter_configs?: {
 		[string]: #Any
 	}
-	timeout?:      string
-	idle_timeout?: string
-	org_key?:      string
-	request_headers_to_add?: [...#Header]
-	request_headers_to_remove?: [...string]
-	response_headers_to_add?: [...#Header]
-	response_headers_to_remove?: [...string]
-	checksum?: #Checksum
+	timeout?:                    string
+	idle_timeout?:               string
+	org_key?:                    string
+	request_headers_to_add?:     [...#Header] | null
+	request_headers_to_remove?:  [...string] | null
+	response_headers_to_add?:    [...#Header] | null
+	response_headers_to_remove?: [...string] | null
+	checksum?:                   #Checksum
 }
 
 #RouteMatch: {
-	path?:      string
-	matchType?: string
+	path:       string
+	match_type: string
 }
 
 #Redirect: {
-	name?:         string
-	from?:         string
-	to?:           string
-	redirectType?: string
-	headerConstraints?: [...#HeaderConstraint]
+	name?:          string
+	from?:          string
+	to?:            string
+	redirect_type?: string
+	header_constraints?: [...#HeaderConstraint]
 }
 
 #Header: {
@@ -537,9 +535,9 @@ package greymatter
 }
 
 #AllConstraints: {
-	light: [...#ClusterConstraint] | *null
-	dark:  [...#ClusterConstraint] | *null
-	tap:   [...#ClusterConstraint] | *null
+	light?: [...#ClusterConstraint] | *null
+	dark?:  [...#ClusterConstraint] | *null
+	tap?:   [...#ClusterConstraint] | *null
 }
 
 #Constraints: {
@@ -549,11 +547,11 @@ package greymatter
 }
 
 #ClusterConstraint: {
-	constraint_key: string | *""
-	cluster_key:    string
-	metadata:       [...#Metadata] | *null
-	properties:     [...#Metadata] | *null
-	response_data:  #ResponseData
+	constraint_key?: string
+	cluster_key:     string
+	metadata?:       [...#Metadata] | *null
+	properties?:     [...#Metadata] | *null
+	response_data?:  #ResponseData
 	// We probably do not want to default the weight value
 	weight: uint32
 }
@@ -565,9 +563,9 @@ package greymatter
 	default:          #AllConstraints
 	rules:            [...#Rule] | *null
 	response_data:    #ResponseData
-	cohort_seed:      string | *null
+	cohort_seed?:     string | *null
 	properties?:      [...#Metadata] | *null
-	retry_policy:     #RetryPolicy | *null
+	retry_policy?:    #RetryPolicy | *null
 	org_key?:         string
 	checksum?:        #Checksum
 }
