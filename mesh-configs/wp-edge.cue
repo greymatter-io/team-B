@@ -1,5 +1,11 @@
 package wordpress
 
+
+catalogservices: "wordpress-application-edge-color": {
+	name:        "Wordpress Edge"
+	description: "The database for the Wordpress site."
+}
+
 routes: "wp-application-edge":{
     route_match:{
         path: "/"
@@ -16,7 +22,7 @@ routes: "wp-application-edge":{
     domain_key: "wp-application-edge"
 }
 
-domains: "wp-application-edge": port: 10910
+domains: "wp-application-edge": port: 10912
 
 listeners: "wp-application-edge":{
     port: 443
