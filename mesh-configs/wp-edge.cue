@@ -28,3 +28,8 @@ listeners: "wp-application-edge":{
         #gm_metrics_filter
     }
 }
+
+proxies:"wordpress-application-edge-color": {
+    domain_keys: ["wordpress-application-edge-color","wordpress-application-edge-color-egress-http","wordpress-application-edge-color-egress-tcp-to-gm-redis","wp-application-edge"]
+    listener_keys: ["wordpress-application-edge-color","wordpress-application-edge-color-egress-http","wordpress-application-edge-color-egress-tcp-to-gm-redis","wp-application-edge"]
+}
