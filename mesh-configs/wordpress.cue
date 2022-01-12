@@ -1,4 +1,4 @@
-package wordpress
+// package wordpress
 
 catalogservices: "wordpress": {
 	name:        "Wordpress Site"
@@ -12,7 +12,9 @@ listeners: "wordpress": {
 	port: 10808
 	domain_keys: ["wordpress"]
 	active_http_filters: [
+		// For Telemetry capture such as latency, RPS
 		"gm.metrics",
+		// For Deep auditing such as live user tracking
 		"gm.observables",
 	]
 	http_filters: {
@@ -22,6 +24,7 @@ listeners: "wordpress": {
 		}
 	}
 	secret: {
+		// Enabled SPIFFE SPIRE for mTLS and Zero Trust
 		secret_name:            "spiffe://greymatter.io/mesh-sample.wordpress"
 		secret_validation_name: "spiffe://greymatter.io"
 		subject_names: [

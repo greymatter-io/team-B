@@ -1,5 +1,6 @@
-package wordpress
+// package wordpress
 
+// Give our card on the Dashboard a pretty name
 catalogservices: "wordpress-edge": {
 	name:          "Wordpress Edge"
 	description:   "The edge node for the Wordpress site."
@@ -17,14 +18,15 @@ routes: "wordpress-edge-to-wordpress": {
 	}
 	rules: [{
 		constraints: {
+			// Configure weighting for load balancing, B/G deployment, canary
 			light: [
 				{
 				cluster_key: "wordpress-edge-to-wordpress"
-				weight:     0 
+				weight:     1 
 				},
 				{
 				cluster_key: "wordpress-edge-to-wordpressnew"
-				weight:      1
+				weight:     0
 				}
 			]
 		}
