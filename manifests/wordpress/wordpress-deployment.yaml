@@ -33,7 +33,6 @@ metadata:
     greymatter.io/cluster: wordpress
     app: wordpress
   annotations:
-    greymatter.io/egress-http-local: '["control", "catalog"]'
     greymatter.io/egress-tcp-local: '["wordpressdb"]'
 spec:
   selector:
