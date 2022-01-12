@@ -17,13 +17,15 @@ routes: "wordpress-edge-to-wordpress": {
 	}
 	rules: [{
 		constraints: {
-			light: [{
+			light: [
+				{
 				cluster_key: "wordpress-edge-to-wordpress"
 				weight:      1
-			},
+				},
+				{
 				cluster_key: "wordpress-edge-to-wordpressnew"
 				weight:      0
-			}
+				}
 			]
 		}
 	}]
