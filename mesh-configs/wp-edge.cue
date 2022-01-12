@@ -1,4 +1,4 @@
-// package wordpress
+package wordpress
 
 
 catalogservices: "wordpress-application-edge": {
@@ -9,7 +9,7 @@ catalogservices: "wordpress-application-edge": {
     capability: ""
 }
 
-routes: "wp-application-edge":{
+routes: "wordpress-edge-to-wordpress": {
     route_match:{
         path: "/"
         match_type: "prefix"
@@ -17,36 +17,22 @@ routes: "wp-application-edge":{
     rules: [{
         constraints:{
             light:[{
-                cluster_key: "wordpress"
+                cluster_key: "wordpress-edge-to-wordpress"
                 weight: 1
             }]
         }
     }]
-    domain_key: "wordpress-application-edge"
+    domain_key: "wordpress-edge"
 }
 
-domains: "wp-application-edge":{
-    port: 10809
-    custom_headers: [
-		{
-			key:   "x-forwarded-proto"
-			value: "https"
-		},
-	]
-}
 
-listeners: "wp-application-edge":{
-    port: 10809
-    domain_keys: ["wp-application-edge"]
+listeners: "wordpress-edge": {
+    port: 10808
+    domain_keys: ["wordpress-edge"]
     active_http_filters:[
         "gm.metrics"
     ]
     http_filters: {
         #gm_metrics_filter
     }
-}
-
-proxies:"wordpress-application-edge": {
-    domain_keys: ["wordpress-application-edge","wordpress-application-edge-egress-http","wordpress-application-edge-egress-tcp-to-gm-redis","wp-application-edge"]
-    listener_keys: ["wordpress-application-edge","wordpress-application-edge-egress-http","wordpress-application-edge-egress-tcp-to-gm-redis","wp-application-edge"]
 }
