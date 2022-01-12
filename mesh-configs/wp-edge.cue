@@ -6,8 +6,8 @@ catalogservices: "wordpress-edge": {
 	description:   "The edge node for the Wordpress site."
 	owner:         "Team B"
 	owner_url:     "https://github.com/greymatter-io/team-b"
-	documentation: "https://wordpress.next-gen-demo.greymatter.services"
-	api_endpoint:  "https://wordpress.next-gen-demo.greymatter.services"
+	documentation: "https://wordpress.next-gen-demo.greymatter.services:10808/"
+	api_endpoint:  "https://wordpress.next-gen-demo.greymatter.services:10808/"
 	capability:    "web"
 }
 
@@ -22,11 +22,11 @@ routes: "wordpress-edge-to-wordpress": {
 			light: [
 				{
 				cluster_key: "wordpress-edge-to-wordpress"
-				weight:     1
+				weight:     0.5
 				},
 				{
 				cluster_key: "wordpress-edge-to-wordpressnew"
-				weight:     0
+				weight:     0.5
 				}
 			]
 		}
