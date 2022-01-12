@@ -1,4 +1,4 @@
-// package wordpress
+package wordpress
 
 // Give our card on the Dashboard a pretty name
 catalogservices: "wordpress-edge": {
@@ -22,11 +22,11 @@ routes: "wordpress-edge-to-wordpress": {
 			light: [
 				{
 				cluster_key: "wordpress-edge-to-wordpress"
-				weight:     0.5 
+				weight:     1
 				},
 				{
 				cluster_key: "wordpress-edge-to-wordpressnew"
-				weight:     0.5
+				weight:     0
 				}
 			]
 		}

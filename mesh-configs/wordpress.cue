@@ -1,4 +1,4 @@
-// package wordpress
+package wordpress
 
 catalogservices: "wordpress": {
 	name:        "Wordpress Site"
@@ -14,7 +14,7 @@ listeners: "wordpress": {
 	active_http_filters: [
 		// For Telemetry capture such as latency, RPS
 		"gm.metrics",
-		// For Deep auditing such as live user tracking
+		// For Deep auditing such as live user tracking, visability, and traffic
 		"gm.observables",
 	]
 	http_filters: {
