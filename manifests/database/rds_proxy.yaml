@@ -1,3 +1,11 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql-pass
+type: Opaque
+stringData:
+  password: "stupidsimplepassword"
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
