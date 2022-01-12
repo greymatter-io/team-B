@@ -4,8 +4,8 @@ kind: Deployment
 metadata:
   name: wordpress-edge
   namespace: team-b
-  # annotations:
-    # greymatter.io/egress-http-local: '["wordpress"]'
+  annotations:
+    greymatter.io/egress-http-local: '["wordpress","wordpressnew"]'
 spec:
   selector:
     matchLabels:
