@@ -3,7 +3,7 @@ package wordpress
 catalogservices: "wordpress": {
 	name:        "Wordpress Site"
 	description: "A Wordpress site."
-	capability: ""
+	capability:  "web"
 }
 
 listeners: "wordpress": {
@@ -16,7 +16,7 @@ listeners: "wordpress": {
 	http_filters: {
 		#gm_metrics_filter
 		gm_observables: {
-		 topic: "wordpress"
+			topic: "wordpress"
 		}
 	}
 	secret: {
