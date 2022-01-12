@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-rds
+  namespace: team-b
+  annotations:
+    greymatter.io/egress-tcp-external: |-
+      [
+        {
+          "name": "mysql-rds:3306",
+          "host": "capital-one-demo.cnkwv7bcyhsc.us-east-1.rds.amazonaws.com",
+          "port": 3306
+        }
+      ]
+spec:
+  selector:
+    matchLabels:
+      app: mysql-rds
+  template:
+    metadata:
+      labels:
+        app: mysql-rds
+    spec:
+      containers:
+      - name: gm-proxy
+        image: gm-proxy
+        ports:
+          - name: proxy
+            containerPort: 10808
+            protocol: TCP 
+        resources: {}
