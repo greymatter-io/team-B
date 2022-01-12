@@ -24,6 +24,7 @@ listeners: "wordpress": {
 		secret_validation_name: "spiffe://greymatter.io"
 		subject_names: [
 			"spiffe://greymatter.io/mesh-sample.edge",
+			"spiffe://greymatter.io/mesh-sample.wordpress-edge",
 		]
 		ecdh_curves: [
 			"X25519:P-256:P-521:P-384",
