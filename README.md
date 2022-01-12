@@ -1,4 +1,4 @@
-# Team Snacks
+# Team B
 
 Here we demonstrate configuring a local mesh with configuration written entirely
 in CUE.

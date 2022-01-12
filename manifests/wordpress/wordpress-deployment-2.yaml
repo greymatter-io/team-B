@@ -33,7 +33,7 @@ metadata:
     greymatter.io/cluster: wordpressnew
     app: wordpressnew
   annotations:
-    greymatter.io/egress-tcp-local: '["mysql-rds"]'
+    greymatter.io/egress-tcp-local: '["wordpressdb"]'
 spec:
   selector:
     matchLabels:
