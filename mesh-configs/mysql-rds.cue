@@ -1,4 +1,4 @@
-package wordpress
+// package wordpress
 
 listeners: "mysql-rds": {
 	"active_network_filters": [
