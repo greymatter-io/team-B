@@ -1,10 +1,10 @@
 package wordpress
 
 catalogservices: "greymatter-sync-team-b": {
-	name:                    "Team B: Grey Matter Sync"
-	description:             "Dedicated sync container for managing Team B's control plane configurations via GitOps."
-	owner:                   "Grey Matter"
-	owner_url:               "https://greymatter.io"
-	capability:              "GitOps"
-	business_impact:         "high"
+	name:            "Grey Matter Sync (B)"
+	description:     "Dedicated sync container for managing Team B's control plane configurations via GitOps."
+	owner:           "Team B"
+	owner_url:       "https://github.com/greymatter-io/team-b"
+	capability:      "GitOps"
+	business_impact: "high"
 }
