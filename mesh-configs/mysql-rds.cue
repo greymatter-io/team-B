@@ -14,21 +14,21 @@ listeners: "mysql-rds": {
 	"port":     10808
 	"protocol": "http_auto"
 	"domain_keys": ["mysql-rds"]
-	// "secret": {
-	//  "secret_name":            "spiffe://greymatter.io/mesh-sample.mysql-rds"
-	//  "secret_validation_name": "spiffe://greymatter.io"
-	//  "subject_names": [
-	//   "spiffe://greymatter.io/mesh-sample.wordpressnew",
-	//   "spiffe://greymatter.io/mesh-sample.wordpress",
-	//  ]
-	//  "ecdh_curves": [
-	//   "X25519:P-256:P-521:P-384",
-	//  ]
-	//  "forward_client_cert_details": "APPEND_FORWARD"
-	//  "set_current_client_cert_details": {
-	//   "uri": false
-	//  }
-	// }
+	"secret": {
+	 "secret_name":            "spiffe://greymatter.io/mesh-sample.mysql-rds"
+	 "secret_validation_name": "spiffe://greymatter.io"
+	 "subject_names": [
+	  "spiffe://greymatter.io/mesh-sample.wordpressnew",
+	  "spiffe://greymatter.io/mesh-sample.wordpress",
+	 ]
+	 "ecdh_curves": [
+	  "X25519:P-256:P-521:P-384",
+	 ]
+	 "forward_client_cert_details": "APPEND_FORWARD"
+	 "set_current_client_cert_details": {
+	  "uri": false
+	 }
+	}
 }
 
 // routes: "mysql-rds:3306": {
