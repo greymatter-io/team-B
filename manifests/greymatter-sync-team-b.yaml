@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: greymatter-sync-team-b
-  namespace: greymatter
+  namespace: team-b
   annotations:
     greymatter.io/egress-http-local: '["control", "catalog"]'
 spec:
@@ -60,7 +60,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: greymatter-sync-team-b-config
-  namespace: greymatter
+  namespace: team-b
 data:
   # property-like keys; each key maps to a simple value
   GREYMATTER_GIT_REMOTE: "git@github.com:greymatter-io/team-B.git"
