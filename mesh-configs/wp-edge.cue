@@ -2,6 +2,12 @@ package wordpress
 
 // Finish building out the cluster for the wp-edge to have a circuit breaker
 clusters: "wordpress-edge": {
+	instances: [
+		{
+			host: "0.0.0.0"
+			port: 10808
+		}
+	]
 	require_tls: true
 	secret: {
 		"ecdh_curves": [
