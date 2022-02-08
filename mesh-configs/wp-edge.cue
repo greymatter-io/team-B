@@ -11,11 +11,11 @@ routes: "wordpress-edge-to-wordpress": {
 			light: [
 				{
 				cluster_key: "wordpress-edge-to-wordpress"
-				weight:     .5
+				weight:     0.5
 				},
 				{
 				cluster_key: "wordpress-edge-to-wordpressnew"
-				weight:     .5
+				weight:     0.5
 				}
 			]
 		}
