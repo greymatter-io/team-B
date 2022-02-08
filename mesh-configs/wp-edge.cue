@@ -1,33 +1,5 @@
 package wordpress
 
-// Finish building out the cluster for the wp-edge to have a circuit breaker
-clusters: "wordpress-edge": {
-	instances: [
-		{
-			host: "0.0.0.0"
-			port: 10808
-		}
-	]
-	require_tls: true
-	secret: {
-		"ecdh_curves": [
-		"X25519:P-256:P-521:P-384"
-		],
-		"secret_key": "",
-		"secret_name": "spiffe://greymatter.io/mesh-sample.edge",
-		"secret_validation_name": "spiffe://greymatter.io",
-		"subject_names": [
-			"spiffe://greymatter.io/mesh-sample.wordpress-edge"
-		]
-	}
-
-	// helps to mitigate overabundant downstream requests, DoS attacks, bugs etc
-	circuit_breakers: {
-		"max_connections": 1,
-		"max_pending_requests": 1
-	}
-}
-
 routes: "wordpress-edge-to-wordpress": {
 	route_match: {
 		path:       "/"
