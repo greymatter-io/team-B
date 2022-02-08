@@ -250,12 +250,12 @@ package greymatter
 }
 
 #CircuitBreakersThresholds: {
-	max_connections?:     int64
-	max_pending_requests?: int64
-	max_requests?:        int64
-	max_retries?:         int64
-	max_connection_pools?: int64
-	track_remaining?:     bool
+	maxConnections?:     int64
+	maxPendingRequests?: int64
+	maxRequests?:        int64
+	maxRetries?:         int64
+	maxConnectionPools?: int64
+	trackRemaining?:     bool
 	high?:               #CircuitBreakers
 }
 
